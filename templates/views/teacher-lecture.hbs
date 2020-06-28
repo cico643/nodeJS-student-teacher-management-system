@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<style>
+    .hver:hover{
+        background-color: #eeeeee;
+    }
+    .lnk:link{
+        color: black;
+        text-decoration: none;
+    }
+    .Anchor:link{
+        text-decoration: none;
+    }
+    .Anchor:hover{
+        border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-image: initial;
+    cursor: pointer;
+    text-decoration: none;
+    }
+    #curs:hover{
+        cursor: pointer;
+    }
+</style>
+
+</head>
+
+<body style="background-image: url('/img/Background-website-01.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+    {{>AuthNavbar}}
+    {{#if success}}
+    <div class="alert alert-success" role="alert">{{success}}</div>
+    {{/if}}
+    {{#if err}}
+    <div class="alert alert-danger" role="alert">{{err}}</div>
+    {{/if}}
+    <div class="container" style="margin-top: 15px;">
+        <div class="row">
+        <div class="col-md-2" style="margin-right: 15px;">
+            <div class="row">
+                
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">SINIFLARIM</h6>
+                        {{#if lectures}}
+                        {{#lectures}}
+                        <a style="color: black;" class="lnk" href="/lectures/{{this._id}}">
+                        <div class="row hver" style="display: inline:block;"> 
+                            <p class="card-text" style="margin: 0px 0.5rem ;white-space:nowrap ;overflow: hidden; text-overflow: ellipsis;">{{this.lectureName}}</p>
+                            </div></a>
+                        {{/lectures}}
+                        {{else}}
+                        Kayıtlı olduğunuz bir sınıf yok
+                        {{/if}}
+                        <hr>
+                        <h6 class="card-subtitle mb-2 text-muted">Yeni bir sınıf oluştur</h6>
+                        <form action="/lectures/create">
+                                <div class="text-center">
+                            <button type="submit" style="width: 100%" class="btn btn-warning"><b>Git</b></button></div>
+
+                        </form>
+                    </div>
+                    </div>
+            </div>
+        
+        </div>
+        
+        
+<div class="col-md-6"> 
+<div class="row" style="margin-bottom:1.25rem;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body"> 
+            <form id="post-olustur-form" action="/posts/create?lecid={{lecture._id}}" method="post">
+            <h5 class="card-title" style="display: block;">Yeni Post Oluştur</h5>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                </div>
+                <input type="text" required class="form-control" id="title" name="title" placeholder="Başlık" aria-label="Başlık" aria-describedby="basic-addon1">
+                </div>
+
+            
+            <h6 class="card-subtitle mb-2 text-muted" style="display: block;">Post içeriği</h6><br>
+            <div>
+                <div class="form-group shadow-textarea">
+                    <textarea required name="content" class="form-control z-depth-1" id="content" rows="4" placeholder="İçeriği buraya yaz..."></textarea>
+                    </div>
+                
+
+            </div>
+                <div class="text-center">
+                <button type="submit" style="width: 100%" class="btn btn-warning"><b>Gönder</b></button></div>
+                <input type="hidden" name="lectureId" id="lectureId" value="{{lecture._id}}">
+            </form>
+        </div>
+        </div>
+</div>
+
+
+
+
+
+
+
+    {{#if posts}}
+        {{#posts}}
+            <div class="row" style="margin-bottom:1.25rem;">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <span style="display: flex; flex-direction:row">
+                        <h5 class="card-title" style="display: block;">{{this.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" style="display: block; margin-left:65%"><a href="/users/{{this.owner}}"><img src="/users/{{this.owner}}/avatar"></a></h6></span><hr>
+                        <p class="card-text">{{this.content}}</p>
+                    </div>
+                    </div>
+            </div>
+        {{/posts}}
+        {{else}}
+        <div class="row" style="margin-bottom:1.25rem;">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted" style="display: block; text-align:center; margin-top:2px">Bu sınıfta henüz post yok. İlk sen oluştur..</h6>
+                        </div>
+                    </div>
+            </div>
+        {{/if}}   
+        </div>
+        {{#if assignments}}
+        <div class="col-md-3" style="margin-left: 15px;">
+            {{#assignments}}
+            <div class="row">
+                <a href="/assignments/{{this._id}}" class="Anchor"><div class="card" style="width: 18rem;">    
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;">{{this.name}}</h5>   
+                        <h6 class="card-subtitle mb-2 text-muted" style="white-space:nowrap ;overflow: hidden; text-overflow: ellipsis;">Teslim Tarihi: {{this.dueDate}}</h6>
+                    </div>
+                    </div></a>
+            </div>
+        {{/assignments}}
+        {{else}}
+         <div class="col-md-3" style="margin-left: 15px;">
+             <div class="row">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mt-2 ml-3 mb-2 text-muted">Henüz verilmiş ödeviniz yok</h6>
+                    </div>
+                    </div>
+            </div>
+         
+        
+        {{/if}}
+        
+         <div class="row">
+             <div class="card" style="width: 18rem;">
+                    <div class="card-body"> 
+                        <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;">Yeni Ödev Oluştur</h6>
+                        <form action="/assignments/create">
+                                <div class="text-center">
+                                    <input type="hidden" id="lecid" name="lecid" value="{{lecture._id}}">
+                            <button type="submit" style="width: 100%" class="btn btn-warning"><b>Git</b></button></div>
+                        </form>
+                    </div>
+                    
+            </div>
+            </div></div>
+        </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

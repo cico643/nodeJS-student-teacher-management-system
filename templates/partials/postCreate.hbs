@@ -1,0 +1,18 @@
+<div class="row" style="margin-bottom:1.25rem;">
+    <div class="card" style="width: 100%;">
+        <div class="card-body"> 
+            <form id="post-olustur-form" action="/posts/create?lecid={{lecture._id}}" method="post">
+            <h5 class="card-title" style="display: block;">Yeni Post Oluştur</h5>
+            <input id="title" type="text" placeholder="Baslik" name="title"><hr>
+            <h6 class="card-subtitle mb-2 text-muted" style="display: block;">Post içeriği</h6><br>
+            <div>
+                <textarea name="content" id="content" cols="30" rows="10"></textarea>
+                <script src="https://cdn.ckeditor.com/4.9.1/standard/ckeditor.js"></script>
+                <script>CKEDITOR.replace("content")</script>
+            </div>
+                <div class="text-center">
+                <button type="submit" style="width: 100%" class="btn btn-warning"><b>Oluştur</b></button></div>
+            </form>
+        </div>
+        </div>
+</div>

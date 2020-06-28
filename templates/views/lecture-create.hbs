@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<style>
+    #curs:hover{
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body style="background-image: url('/img/Background-website-01.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+    {{>AuthNavbar}}
+    {{#if err}}
+    <div class="alert alert-danger" role="alert">{{err}}</div>
+    {{/if}}
+    <div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-md-12" style="margin-left: 100px;">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+
+                    <form id="lecture-olustur-form" action="/lectures/create" method="post">
+            <h3 class="card-title" style="display: block;">Yeni Sınıf Oluştur</h3>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                </div>
+                <input type="text" required class="form-control" id="lectureName" name="lectureName" placeholder="Sınıf Adı" aria-label="Sınıf Adı" aria-describedby="basic-addon1">
+                </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                </div>
+                <input type="text" required class="form-control" id="description" name="description" placeholder="Sınıf Açıklaması" aria-label="Sınıf Açıklaması" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">#</span>
+                </div>
+                <input type="text" required class="form-control" id="lectureNo" name="lectureNo" placeholder="Öğrencilerin katılabilmesi için sınıf kodu" aria-label="Öğrencilerin katılabilmesi için sınıf kodu" aria-describedby="basic-addon1">
+                </div><br>
+                <div class="text-center">
+                <button type="submit" style="width: 50%" class="btn btn-warning"><b>Oluştur</b></button></div>
+            </form>
+
+
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
